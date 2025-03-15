@@ -1,4 +1,4 @@
-import { sqlite3 } from "sqlite3";
+import  sqlite3  from "sqlite3";
 
 import { 
     createUserTable,
@@ -6,13 +6,13 @@ import {
     createTaskTable,
     createProjectCommentTable,
     createTaskCommentTable
- } from "./tables";
+ } from "./tables.js";
 
 const sql = sqlite3.verbose();
 
-const db = new sql.Database('./tutorial.db', connected);
+const db = new sql.Database('./tutorial.db', sqlite3.OPEN_READWRITE , connected);
 
-const connected = (err)=> {
+function connected(err){
     if(err){
         console.log("Database creation failed :", err.message);
         return ;

@@ -1,4 +1,4 @@
-import { db } from "./db.config";
+import { db } from "./db.config.js";
 
 
 // user table creation
@@ -22,12 +22,12 @@ function createUserTable() {
 
 // project table creation 
 const createQueryForProjectTable = `CREATE TABLE IF NOT EXISTS project(
-                                    id INTEGER NOT NULL PRIMARY KEY AUTINCREMENT,
+                                    id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
                                     name TEXT NOT NULL,
                                     color TEXT NOT NULL,
-                                    is_favorite INTEGER CHECK(is_favourite) NOT NULL),
+                                    is_favourite INTEGER CHECK(is_favourite IN (0, 1)) NOT NULL,
                                     user_id INTEGER,
-                                    FOREIGN KEY (user_id) REFERENCES user(id) ON DELETED CASCADE
+                                    FOREIGN KEY (user_id) REFERENCES user(id) ON DELETE CASCADE
                                     )`;
 
 function createProjectTable() {
