@@ -13,6 +13,19 @@ const getAllUsers = (req,res)=>{
     });
 }
 
+const getTaskById = (req,res)=>{
+    let id = req.body;
+    getTaskByIdInDB(id, (err, data)=>{
+        if(err){
+            res.status(500);
+            res.json({message : `unsuccessfull read on user table ${err.message}`});
+        }
+        res.status(200);
+        res.json(data);
+    });
+}
+
 export {
-    getAllUsers
+    getAllUsers,
+    getTaskById
 }
