@@ -1,1 +1,4 @@
 node_modules/
+
+# Ignore SQLite database files
+todoList.db

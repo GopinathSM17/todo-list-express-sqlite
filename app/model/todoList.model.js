@@ -206,6 +206,11 @@ const deleteTaskCommentInDB = (id, cb) => {
 };
 
 
+const makeProjectFavouriteInDB = (id , cb)=>{
+    db.run(`UPDATE project SET is_favourite = 1 WHERE id = ?`,[id], (err)=> cb(err));
+}
+
+
 
 
 export {
@@ -233,5 +238,6 @@ export {
     getTaskCommentByIdInDB,
     insertTaskCommentInDB,
     updateTaskCommentInDB,
-    deleteTaskCommentInDB
+    deleteTaskCommentInDB,
+    makeProjectFavouriteInDB
 }

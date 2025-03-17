@@ -27,7 +27,8 @@ import {
     getTaskCommentById,
     insertTaskComment,
     updateTaskComment,
-    deleteTaskComment
+    deleteTaskComment,
+    makeProjectFavourite
  } from "../controller/todoList.controller.js";
 
  //router.get('/', getAllUsers);
@@ -93,6 +94,9 @@ import {
 
  router.delete('/taskcomments/:id', deleteTaskComment);
 
+ // Patch on Project table
+
+ router.patch('/projects/:id', makeProjectFavourite)
 
 export {
     router

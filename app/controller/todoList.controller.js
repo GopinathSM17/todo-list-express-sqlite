@@ -23,7 +23,8 @@ import {
     getTaskCommentByIdInDB,
     insertTaskCommentInDB,
     updateTaskCommentInDB,
-    deleteTaskCommentInDB
+    deleteTaskCommentInDB,
+    makeProjectFavouriteInDB
  } from "../model/todoList.model.js";
 
 // ---- Task table CRUD Operations ----------
@@ -402,7 +403,23 @@ const deleteTaskComment = (req, res)=>{
     });
 }
 
+// makeProjectFavourite ok
 
+const makeProjectFavourite = (req, res)=>{
+    let id = req.params.id;
+    makeProjectFavouriteInDB(id, (err)=>{
+        if(err){
+            res.status(500);
+            res.json({
+                message : "Unsuccessfull patch work on the Project table"
+            })
+        }
+        res.status(200);
+        res.json({
+            message : "Successfull patch work on the Project table"
+        })
+    })
+}
 
 
 export {
@@ -430,5 +447,6 @@ export {
     getTaskCommentById,
     insertTaskComment,
     updateTaskComment,
-    deleteTaskComment
+    deleteTaskComment,
+    makeProjectFavourite
 }

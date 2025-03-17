@@ -8,6 +8,11 @@ import {
     createTaskCommentTable
 } from "./tables.js";
 
+import { 
+    insertProjectDataByTransaction,
+    insertTaskDataByTransaction
+ } from "./insert.js";
+
 const sql = sqlite3.verbose();
 
 const db = new sql.Database('./todoList.db', sqlite3.OPEN_READWRITE, connected);
@@ -40,5 +45,9 @@ createTaskTable();
 createProjectCommentTable();
 
 createTaskCommentTable();
+
+insertProjectDataByTransaction().catch(console.error);
+
+insertTaskDataByTransaction().catch(console.error);
 
 export { db }
