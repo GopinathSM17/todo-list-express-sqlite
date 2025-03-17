@@ -3,7 +3,7 @@ import express from "express";
 const router = express.Router();
 
 import { 
-    getAlltasks,
+    getAllTasks,
     getTaskById,
     insertTask,
     updateTask,
@@ -17,25 +17,35 @@ import {
     getUserById,
     insertUser,
     updateUser,
-    deleteUser
+    deleteUserById,
+    getAllProjectComments,
+    getProjectCommentById,
+    insertProjectComment,
+    updateProjectComment,
+    deleteProjectComment,
+    getAllTaskComments,
+    getTaskCommentById,
+    insertTaskComment,
+    updateTaskComment,
+    deleteTaskComment
  } from "../controller/todoList.controller.js";
 
  //router.get('/', getAllUsers);
 
 
- // Tasks CRUD
+ //-------- Tasks CRUD ----------
 
- router.get('/tasks', getAlltasks)
+ router.get('/tasks', getAllTasks)
 
  router.get('/tasks/:id', getTaskById);
 
  router.post('/tasks', insertTask);
 
- router.put('/tasks', updateTask );
+ router.put('/tasks/:id', updateTask);
 
  router.delete('/tasks/:id', deleteTaskById);
 
- // Projects CRUD 
+ //--------------- Projects CRUD ------------
 
  router.get('/projects/', getAllProjects);
 
@@ -43,11 +53,11 @@ import {
 
  router.post('/projects', insertProject);
 
- router.put('/projects', updateProject);
+ router.put('/projects/:id', updateProject);
 
  router.delete('/projects/:id', deleteProjectById);
 
- // Users CRUD
+//  // Users CRUD
 
  router.get('/users', getAllUsers)
 
@@ -57,20 +67,31 @@ import {
 
  router.put('/users', updateUser);
 
- router.delete('/users/:id', deleteUser);
+ router.delete('/users/:id', deleteUserById);
 
- // Comments CRUD 
+ // Project Comments CRUD 
 
- router.get('/comments', getAllcomments)
+ router.get('/projectcomments', getAllProjectComments)
 
- router.get('/comments/:id', getCommentById);
+ router.get('/projectcomments/:id', getProjectCommentById);
 
- router.post('/comments', insertComment);
+ router.post('/projectcomments', insertProjectComment);
 
- router.put('/comments', updateComment);
+ router.put('/projectcomments', updateProjectComment);
 
- router.delete('/comments/:id', deleteComment);
+ router.delete('/projectcomments/:id', deleteProjectComment);
 
+ // Task Comments CRUD
+ 
+ router.get('/taskcomments', getAllTaskComments)
+
+ router.get('/taskcomments/:id', getTaskCommentById);
+
+ router.post('/taskcomments', insertTaskComment);
+
+ router.put('/taskcomments', updateTaskComment);
+
+ router.delete('/taskcomments/:id', deleteTaskComment);
 
 
 export {

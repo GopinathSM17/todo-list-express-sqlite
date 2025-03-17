@@ -47,10 +47,10 @@ const createQueryForTaskTable = `CREATE TABLE IF NOT EXISTS task(
                                     description TEXT NOT NULL,
                                     due_date DATE NOT NULL,
                                     is_completed INTEGER CHECK(is_completed IN (0, 1)) NOT NULL,
-                                    created_at DATE NOT NULL,
-                                    project_id INTEGER,
+                                    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+                                    project_id INTEGER NOT NULL,
                                     FOREIGN KEY (project_id) REFERENCES project(id) ON DELETE CASCADE
-                                     )`;
+                                    )`;
 
 function createTaskTable() {
     db.run(createQueryForTaskTable, [], (err) => {
@@ -67,7 +67,7 @@ function createTaskTable() {
 const createQueryForProjectCommentTable = `CREATE TABLE IF NOT EXISTS project_comment(
                                             id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
                                             content TEXT NOT NULL,
-                                            posted_at TEXT NOT NULL,
+                                            posted_at DATETIME DEFAULT CURRENT_TIMESTAMP,
                                             project_id INTEGER NOT NULL,
                                             FOREIGN KEY (project_id) REFERENCES project(id) ON DELETE CASCADE
                                             )`;
@@ -87,7 +87,7 @@ function  createProjectCommentTable() {
 const  createQueryForTaskCommentTable = `CREATE TABLE IF NOT EXISTS task_comment(
                                             id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
                                             content TEXT NOT NULL,
-                                            posted_at TEXT NOT NULL,
+                                            posted_at DATETIME DEFAULT CURRENT_TIMESTAMP,
                                             task_id INTEGER NOT NULL,
                                             FOREIGN KEY (task_id) REFERENCES task(id) ON DELETE CASCADE
                                             )`;
@@ -95,10 +95,10 @@ const  createQueryForTaskCommentTable = `CREATE TABLE IF NOT EXISTS task_comment
 function  createTaskCommentTable() {
     db.run(createQueryForTaskCommentTable, [], (err) => {
         if(err){
-            console.log(`Creation of projectComment table is unsuccessfull ${err.message}`);
+            console.log(`Creation of taskComment table is unsuccessfull ${err.message}`);
             return;
         }
-        console.log(`Creation of projectComment table is successfull`);
+        console.log(`Creation of taskComment table is successfull`);
     });
 }
 
