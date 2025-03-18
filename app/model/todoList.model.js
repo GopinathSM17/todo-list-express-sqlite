@@ -210,6 +210,9 @@ const makeProjectFavouriteInDB = (id , cb)=>{
     db.run(`UPDATE project SET is_favourite = 1 WHERE id = ?`,[id], (err)=> cb(err));
 }
 
+const getTaskByFilterInDB = (query , cb)=>{
+    db.run(query, [], (err, data)=> cb(err, data));
+}
 
 
 
@@ -239,5 +242,6 @@ export {
     insertTaskCommentInDB,
     updateTaskCommentInDB,
     deleteTaskCommentInDB,
-    makeProjectFavouriteInDB
+    makeProjectFavouriteInDB,
+    getTaskByFilterInDB
 }

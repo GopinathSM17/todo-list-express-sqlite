@@ -28,7 +28,8 @@ import {
     insertTaskComment,
     updateTaskComment,
     deleteTaskComment,
-    makeProjectFavourite
+    makeProjectFavourite,
+    getTaskByFilter
  } from "../controller/todoList.controller.js";
 
  //router.get('/', getAllUsers);
@@ -97,6 +98,10 @@ import {
  // Patch on Project table
 
  router.patch('/projects/:id', makeProjectFavourite)
+
+ // Get task with filters
+
+ router.get('/tasks', getTaskByFilter)
 
 export {
     router

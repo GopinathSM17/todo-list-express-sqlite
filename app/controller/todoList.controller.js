@@ -24,7 +24,8 @@ import {
     insertTaskCommentInDB,
     updateTaskCommentInDB,
     deleteTaskCommentInDB,
-    makeProjectFavouriteInDB
+    makeProjectFavouriteInDB,
+    getTaskByFilterInDB
  } from "../model/todoList.model.js";
 
 // ---- Task table CRUD Operations ----------
@@ -403,7 +404,7 @@ const deleteTaskComment = (req, res)=>{
     });
 }
 
-// makeProjectFavourite ok
+// makeProjectFavourite
 
 const makeProjectFavourite = (req, res)=>{
     let id = req.params.id;
@@ -421,6 +422,41 @@ const makeProjectFavourite = (req, res)=>{
     })
 }
 
+// -----------getTaskByFilter----------------
+
+const getTaskByFilter = (req, res)=>{
+    let {project_id, due_date, is_completed, created_at} = req.query;
+    let query = `SELECT * FROM tasks WHERE 1=1`; // Base query
+    let params = [];
+
+    if (project_id) {
+        query += ` AND project_id = ?`;
+        params.push(project_id);
+    }
+
+    if (due_date) {
+        query += ` AND due_date = ?`;
+        params.push(due_date);
+    }
+
+    if (is_completed !== undefined) {
+        query += ` AND is_completed = ?`;
+        params.push(is_completed);
+    }
+
+    if (created_at) {
+        query += ` AND DATE(created_at) = ?`;
+        params.push(created_at);
+    }
+    getTaskByFilterInDB(query, (err, data)=>{
+        if(err){
+            res.status(500);
+            res.json({ message : "Unsuccessfull filter on task table"})
+        }
+        res.status(200);
+        res.json(data);
+    });
+}
 
 export {
     getAllTasks,
@@ -448,5 +484,6 @@ export {
     insertTaskComment,
     updateTaskComment,
     deleteTaskComment,
-    makeProjectFavourite
+    makeProjectFavourite,
+    getTaskByFilter
 }
